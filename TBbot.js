@@ -174,7 +174,7 @@ function chek_tbsite(){
                         else{
                             //imgsend(Math.floor(Math.random()*15));
                             var a = Math.floor(Math.random()*15);
-                            wh_send(a);
+                            imgsend(a);
                             hook.send(
                                     logbook[a].cargo + '\n' +
                                     logbook[a].from + '\n' +
