@@ -17,7 +17,6 @@ load_table();
 
 
 function wh_send(num){
-    
     var index = logbook.length-num;
     for (index; index < logbook.length; index++) {
         var i = 0;
@@ -74,8 +73,7 @@ function load_table(){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
-                setInterval( chek_tbsite, 20000);
-                //wh_send(Math.floor(Math.random()*15));
+                setInterval( chek_tbsite, 120000);
             }
         }
     );
@@ -101,20 +99,6 @@ function chek_tbsite(){
                             wh_send(logbook.length-lb_count);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
-                        else{
-                            /*
-                            //var a = Math.floor(Math.random()*15);
-                            hook.send(
-                                logbook[a].cargo + '\n' +
-                                logbook[a].from + '\n' +
-                                logbook[a].distance + '\n' +
-                                logbook[a].to + '\n' +
-                                logbook[a].profit + '\n' +
-                                logbook[a].weight + '\n' +
-                                logbook[a].points + '\n'
-                            );
-                            */
-                        }
                     }
                 );
             }
@@ -125,7 +109,7 @@ function chek_tbsite(){
 function getcsvurl(){
     var cdate = new Date();
     var td = cdate.getDate();
-    var th = cdate.getHours()-2;
+    var th = cdate.getHours();
     var tm = cdate.getMinutes();
     var ts = cdate.getSeconds();
     if (td < 10) { td = '0' + td; }
@@ -133,8 +117,8 @@ function getcsvurl(){
     if (tm < 10) { tm = '0' + tm; }
     if (ts < 10) { ts = '0' + ts; }
     var sdate = cdate.toISOString();
-    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+01:00';
-    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+01:00';
+    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+03:00';
+    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+03:00';
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
 
