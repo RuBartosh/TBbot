@@ -7,13 +7,13 @@
 
 
 // Модули
-const Discord = require('discord.js');
-var request = require('request');
+const discord = require('discord.js');
+const hook = new discord.WebhookClient('507601898212425756', 'NkFxq_JQCkmI9ycs26dmC6uuISfEYelt_idc3h9xYNAuOBTn1Nf0Dht9qsShnBh_64hc');
 var fs = require('fs');
+var request = require('request');
 //var gm = require('gm');
 
 // Переменные
-const hook = new Discord.WebhookClient('507601898212425756', 'NkFxq_JQCkmI9ycs26dmC6uuISfEYelt_idc3h9xYNAuOBTn1Nf0Dht9qsShnBh_64hc');
 var logbook = [];
 var data_len = 0;
 
@@ -23,8 +23,8 @@ var data_len = 0;
 load_table();
 //chek_tbsite();
 
-/*
-function imgsend(ind){
+
+/*function imgsend(ind){
     var p1 = Math.floor(logbook[ind].points*30);
     if (p1 > 250) { p1 = 250; }
     var p2 = 200 - p1;
@@ -104,7 +104,7 @@ function imgsend(ind){
         .fill('#388000')
         .drawText(670, 22, '---.--')
         
-        /// Запись результата
+        / * // Запись результата
         .write("drawing.png", function (err) {
             if (!err) console.log('done');
         }) * /
@@ -146,21 +146,29 @@ function wh_send(num){
     for (index; index < logbook.length; index++) {
         imgsend(index);
     }
-}
-*/
+}*/
+
 function load_table(){
     fs.readFile('file.csv',
          function(err, data){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
-                setInterval( chek_tbsite, 60000);
+                //setInterval( chek_tbsite, 20000);
+                setInterval( test, 20000);
                 //imgsend(Math.floor(Math.random()*15));
             }
         }
     );
 }
 
+function test(){
+    var a = Math.floor(Math.random()*15);
+    hook.send('Работаю...');
+    hook.send(logbook[a].toString());
+}
+
+/*
 function chek_tbsite(){
     request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
@@ -181,8 +189,12 @@ function chek_tbsite(){
                             wh_send(logbook.length-lb_count);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
-                        //else{imgsend(Math.floor(Math.random()*15));}
-                        hook.send('Hf,jnf. z');
+                        else{
+                            //imgsend(Math.floor(Math.random()*15));
+                            var a = Math.floor(Math.random()*15);
+                            hook.send('Работаю...');
+                            hook.send(logbook[a].toString());
+                        }
                     }
                 );
             }
@@ -205,7 +217,7 @@ function getcsvurl(){
     sd2 = sdate.slice(0,8) + td+'T'+th+':'+tm+':'+ts+'.00+01:00';
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
-
+*/
 function lb_parse(data){
     var t1, t2;     // temp array
     var job = {};
