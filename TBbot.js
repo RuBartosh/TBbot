@@ -1,10 +1,7 @@
-// C_ID = "508059740467757056"
-// C_Secret = "4X6zir0BNOdcwv_wo1bt2bQBg41eoqJV"
-// Token = NTA4MDU5NzQwNDY3NzU3MDU2.Dr5vug.l94bstgrN5gGyU7TE6KBYNtPGOY
-//-------------------------------------------------------------------------------------------------------------------------------------------//
 
-
-
+// Переменные окружения
+const hook_id = process.env.hook_id;
+const hook_token = process.env.hook_token;
 
 // Модули
 const discord = require('discord.js');
@@ -153,6 +150,8 @@ function load_table(){
 }
 
 function chek_tbsite(){
+    const tb_email = process.env.tb_email;
+    const tb_pass = process.env.tb_pass;
     request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
             url:'https://trucksbook.eu/components/notlogged/login.php?go=', 
@@ -175,6 +174,7 @@ function chek_tbsite(){
                         else{
                             //imgsend(Math.floor(Math.random()*15));
                             var a = Math.floor(Math.random()*15);
+                            wh_send(a);
                             hook.send(
                                     logbook[a].cargo + '\n' +
                                     logbook[a].from + '\n' +
