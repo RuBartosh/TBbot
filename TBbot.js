@@ -154,8 +154,8 @@ function load_table(){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
-                //setInterval( chek_tbsite, 20000);
-                setInterval( test, 20000);
+                setInterval( chek_tbsite, 60000);
+                //setInterval( test, 20000);
                 //imgsend(Math.floor(Math.random()*15));
             }
         }
@@ -168,7 +168,6 @@ function test(){
     hook.send(logbook[a].toString());
 }
 
-/*
 function chek_tbsite(){
     request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
@@ -192,8 +191,15 @@ function chek_tbsite(){
                         else{
                             //imgsend(Math.floor(Math.random()*15));
                             var a = Math.floor(Math.random()*15);
-                            hook.send('Работаю...');
-                            hook.send(logbook[a].toString());
+                            hook.send(
+                                    logbook[a].cargo + '\n' +
+                                    logbook[a].from + '\n' +
+                                    logbook[a].distance + '\n' +
+                                    logbook[a].to + '\n' +
+                                    logbook[a].profit + '\n' +
+                                    logbook[a].weight + '\n' +
+                                    logbook[a].points + '\n'
+                                );
                         }
                     }
                 );
@@ -217,7 +223,7 @@ function getcsvurl(){
     sd2 = sdate.slice(0,8) + td+'T'+th+':'+tm+':'+ts+'.00+01:00';
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
-*/
+
 function lb_parse(data){
     var t1, t2;     // temp array
     var job = {};
