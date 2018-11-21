@@ -1,0 +1,26 @@
+{
+  "name": "trucksbook-disbot",
+  "version": "0.3.0",
+  "description": "discord bot",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RuBartosh/TBbot"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "discord"
+  ],
+  "license": "MIT"
+}
