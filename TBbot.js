@@ -11,27 +11,25 @@ const discord = require('discord.js');
 const hook = new discord.WebhookClient('507601898212425756', 'NkFxq_JQCkmI9ycs26dmC6uuISfEYelt_idc3h9xYNAuOBTn1Nf0Dht9qsShnBh_64hc');
 var fs = require('fs');
 var request = require('request');
-//var gm = require('gm');
+var gm = require('gm');
 
 // Переменные
 var logbook = [];
 var data_len = 0;
 
 
-
-
 load_table();
-//chek_tbsite();
 
 
-/*function imgsend(ind){
+
+
+function imgsend(ind){
     var p1 = Math.floor(logbook[ind].points*30);
     if (p1 > 250) { p1 = 250; }
     var p2 = 200 - p1;
     if (p2 < 50) { p2 = 50; }
     p1 = p1.toString(16);
     p2 = p2.toString(16);
-
     gm('img\\fon1.jpg')
         // НикНейм
         .font("fonts\\anastasiascript.ttf", 72)
@@ -95,7 +93,6 @@ load_table();
         .font('font\\aggalleon_bold.ttf', 16)
         .fill('#CC8877')
         .drawText(145-(5*logbook[ind].damage.length), 192, logbook[ind].damage + '%')
-        
         // Баллы
         .font('font\\aggalleon_bold.ttf', 36)
         .fill('#'+p2+p1+'33')
@@ -103,13 +100,7 @@ load_table();
         .font('font\\aggalleon_bold.ttf', 20)
         .fill('#388000')
         .drawText(670, 22, '---.--')
-        
-        / * // Запись результата
-        .write("drawing.png", function (err) {
-            if (!err) console.log('done');
-        }) * /
-        
-        
+        // Буфферизация и отправка в дискорд
         .toBuffer('PNG', function(err, buffer){
             if (err) {
                 console.log(err);
@@ -146,7 +137,7 @@ function wh_send(num){
     for (index; index < logbook.length; index++) {
         imgsend(index);
     }
-}*/
+}
 
 function load_table(){
     fs.readFile('file.csv',
@@ -155,17 +146,10 @@ function load_table(){
                 data = data.toString();
                 lb_parse(data);
                 setInterval( chek_tbsite, 60000);
-                //setInterval( test, 20000);
                 //imgsend(Math.floor(Math.random()*15));
             }
         }
     );
-}
-
-function test(){
-    var a = Math.floor(Math.random()*15);
-    hook.send('Работаю...');
-    hook.send(logbook[a].toString());
 }
 
 function chek_tbsite(){
