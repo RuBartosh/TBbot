@@ -1,15 +1,12 @@
 
-// Переменные окружения
-//const hook_id = process.env.hook_id;
-//const hook_token = process.env.hook_token;
 
 // Модули
-import { WebhookClient } from 'discord.js';
-import { readFile, writeFile } from 'fs';
-//import request, { defaults, post } from 'request';
+const discord = require('discord.js');
+var request = require('request');
+var fs = require('fs');
 
 // Переменные
-const hook = new WebhookClient('507601898212425756', 'NkFxq_JQCkmI9ycs26dmC6uuISfEYelt_idc3h9xYNAuOBTn1Nf0Dht9qsShnBh_64hc');
+const hook = new discord.WebhookClient(process.env.hook_id, process.env.hook_token);
 var logbook = [];
 var data_len = 0;
 
@@ -20,59 +17,75 @@ load_table();
 
 
 function wh_send(num){
-    /*
+    
     var index = logbook.length-num;
     for (index; index < logbook.length; index++) {
-        //imgsend(index);
+        var i = 0;
+        var msg = '';
+        msg += '`∙ ∙ ∙ ∙ ';
+        for (i = Math.ceil(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
+        msg += logbook[index].name
+        for (i = Math.floor(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
+        msg += '                   ∙ ∙ ∙ ∙`\n';
+        msg += '`∙                                                                      ∙`\n';
+        msg += '`∙     ';
+        for (i = logbook[index].damage.length; i <= 5; i++) { msg += ' '; }
+        msg += logbook[index].damage + ' %     ∙`:package:`∙ ';
+        for (i = Math.ceil(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
+        msg += logbook[index].cargo
+        for (i = Math.floor(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
+        msg += ' ∙`:package:`∙ ';
+        for (i = logbook[index].weight.length; i <= 6; i++) { msg += ' '; }
+        msg += logbook[index].weight + ' kg  ∙`\n';
+        msg += '`∙                                                                      ∙`\n';
+        msg += '`∙`:arrow_upper_right:`∙ ' + logbook[index].from;
+        for (i = logbook[index].from.length; i <= 19; i++) { msg += ' '; }
+        msg += ' ∙` `∙';
+        for (i = logbook[index].distance.length; i <= 5; i++) { msg += ' '; }
+        msg += logbook[index].distance + ' km ∙` `∙ ';
+        for (i = logbook[index].to.length; i <= 19; i++) { msg += ' '; }
+        msg += logbook[index].to + ' ∙`:arrow_lower_left:`∙`\n';
+        msg += '`∙                                                                      ∙`\n';
+        msg += '`∙ ∙`:star:`∙ ';
+        for (i = logbook[index].xp.length; i <= 5; i++) { msg += ' '; }
+        msg += logbook[index].xp + '   ∙`:euro:`∙ ';
+        for (i = logbook[index].profit.length; i <= 6; i++) { msg += ' '; }
+        msg += logbook[index].profit + '   ∙`:fuelpump:`∙ ';
+        for (i = logbook[index].avg_cons.length; i <= 5; i++) { msg += ' '; }
+        msg += logbook[index].avg_cons + '   ∙`:chart_with_upwards_trend:`∙ '
+        for (i = logbook[index].points.toFixed(2).length; i <= 5; i++) { msg += ' '; }
+        msg += logbook[index].points.toFixed(2) + '   ∙` `∙ ∙`';
+        hook.send(msg,
+            {
+                code: false,
+                embeds:[{
+                    color: 16758528,
+                    footer: {text:'Euro Truck Simulator 2',icon_url:'https://trucksbook.eu/data/system/icon_ets2.png'},
+                    timestamp: Date.now(),
+                }]
+            }
+        )
     }
-    */
-
-    /*
-    var msg = 'Водитель ' + logbook[ind].name + 
-                ' отвез груз\n' + logbook[ind].cargo + 
-                ' (' + Math.round(logbook[ind].weight/1000) + 'Т)';
-    if (logbook[ind].damage > 0) {
-        msg += ' [ повредив его на ' + logbook[ind].damage + ' ]\n'
-    }else{
-        msg += '\n'
-    }
-    msg += 'из ' + logbook[ind].from + ' →(' + logbook[ind].distance + ' км)→  в ' + logbook[ind].to + '\n'+
-                'Заработав ' + logbook[ind].profit + ' € и ' + logbook[ind].xp + ' опыта\n';
-                //'Максимальная скорость ' + logbook[ind].max_speed + ' км/ч  |  средний расход топлива ' + logbook[ind].avg_cons +' литров на 100 км.';
-    hook.send(msg, 
-        {
-            code: true,
-            file: { attachment: buffer, name: logbook[ind].name+'.png' },
-            embeds:[{
-                color: 16758528,
-                footer: {text:'Euro Truck Simulator 2',icon_url:'https://trucksbook.eu/data/system/icon_ets2.png'},
-                timestamp: Date.now(),
-            }]
-        }
-    )
-    */
 }
 
 function load_table(){
-    readFile('file.csv',
+    fs.readFile('file.csv',
          function(err, data){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
-                //setInterval( chek_tbsite, 20000);
-                wh_send(Math.floor(Math.random()*15));
+                setInterval( chek_tbsite, 20000);
+                //wh_send(Math.floor(Math.random()*15));
             }
         }
     );
 }
-/*
+
 function chek_tbsite(){
-    //const tb_email = process.env.tb_email;
-    //const tb_pass = process.env.tb_pass;
-    request = defaults({jar: true})     // enable cookies
-    post({     // запрос авторизации
+    request = request.defaults({jar: true})     // enable cookies
+    request.post({     // запрос авторизации
             url:'https://trucksbook.eu/components/notlogged/login.php?go=', 
-            form: {email:'bartosch@bk.ru', pass:'5mvBc26gEryuFD6'},
+            form: {email: process.env.tb_email, pass: process.env.tb_pass},
             headers: {'User-Agent': 'Discord-Bot'}
         }, 
         function( err, resp, body ){
@@ -86,11 +99,11 @@ function chek_tbsite(){
                             var lb_count = logbook.length;
                             lb_parse(body);
                             wh_send(logbook.length-lb_count);
-                            writeFile('file.csv', body, function(err) {} );
+                            fs.writeFile('file.csv', body, function(err) {} );
                         }
                         else{
+                            /*
                             //var a = Math.floor(Math.random()*15);
-                            / *
                             hook.send(
                                 logbook[a].cargo + '\n' +
                                 logbook[a].from + '\n' +
@@ -99,8 +112,8 @@ function chek_tbsite(){
                                 logbook[a].profit + '\n' +
                                 logbook[a].weight + '\n' +
                                 logbook[a].points + '\n'
-                                );
-                            * /
+                            );
+                            */
                         }
                     }
                 );
@@ -110,21 +123,21 @@ function chek_tbsite(){
 }
 
 function getcsvurl(){
-    cdate = new Date();
-    td = cdate.getDate();
-    th = cdate.getHours()-2;
-    tm = cdate.getMinutes();
-    ts = cdate.getSeconds();
+    var cdate = new Date();
+    var td = cdate.getDate();
+    var th = cdate.getHours()-2;
+    var tm = cdate.getMinutes();
+    var ts = cdate.getSeconds();
     if (td < 10) { td = '0' + td; }
     if (th < 10) { th = '0' + th; }
     if (tm < 10) { tm = '0' + tm; }
     if (ts < 10) { ts = '0' + ts; }
-    sdate = cdate.toISOString();
-    sd1 = sdate.slice(0,8) + '01T00:00:00.00+01:00';
-    sd2 = sdate.slice(0,8) + td+'T'+th+':'+tm+':'+ts+'.00+01:00';
+    var sdate = cdate.toISOString();
+    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+01:00';
+    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+01:00';
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
-*/
+
 function lb_parse(data){
     var t1, t2;     // temp array
     var job = {};
