@@ -1,18 +1,16 @@
 {
-  "name": "trucksbook-disbot",
+  "name": "TBbot",
   "version": "0.3.0",
   "description": "discord bot",
   "engines": {
-    "node": "10.x"
+    "node": "0.10.x"
   },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "node test.js"
   },
-  "devDependencies": {
-    "request": "^2.81.0",
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/RuBartosh/TBbot"
@@ -22,5 +20,9 @@
     "heroku",
     "discord"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "request": "^2.88.0"
+  }
 }
