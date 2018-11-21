@@ -1,6 +1,6 @@
 {
-    "name": "Start on Heroku: Node.js",
-    "description": "A barebones Node.js app using Express 4",
+    "name": "TBbot",
+    "description": "Discord bot",
     "repository": "https://github.com/RuBartosh/TBbot",
     "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
     "keywords": ["node", "discord", "heroku"],
