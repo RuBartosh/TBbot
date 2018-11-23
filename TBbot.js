@@ -73,7 +73,6 @@ function load_table(){
                 data = data.toString();
                 lb_parse(data);
                 setInterval( chek_tbsite, 120000);
-                console.log('laod ok');
             }
         }
     );
