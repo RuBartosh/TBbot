@@ -110,8 +110,8 @@ function chek_tbsite(){
                         if (body.length > data_len) {
                             var lb_count = logbook.length;
                             lb_parse(body);
-                            wh_send(lb_count);
                             hook.send(body);
+                            wh_send(lb_count);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
                     }
