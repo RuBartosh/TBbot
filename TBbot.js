@@ -16,73 +16,86 @@ load_table();
 
 
 
-function wh_send(num){
-    for (var index = logbook.length-num; index < logbook.length; index++) {
-        var i = 0;
-        var msg = '';
-        msg += '`∙ ∙ ∙ ∙ ';
-        for (i = Math.ceil(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
-        msg += logbook[index].name
-        for (i = Math.floor(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
-        msg += '                   ∙ ∙ ∙ ∙`\n';
-        msg += '`∙                                                                      ∙`\n';
-        msg += '`∙ ';
-        for (i = logbook[index].damage.length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].damage + ' %    ∙`:package:`∙ ';
-        for (i = Math.ceil(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
-        msg += logbook[index].cargo
-        for (i = Math.floor(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
-        msg += ' ∙`:package:`∙ ';
-        for (i = logbook[index].weight.length; i <= 6; i++) { msg += ' '; }
-        msg += logbook[index].weight + ' kg  ∙`\n';
-        msg += '`∙                                                                      ∙`\n';
-        msg += '`∙`:arrow_upper_right:`∙ ' + logbook[index].from;
-        for (i = logbook[index].from.length; i <= 19; i++) { msg += ' '; }
-        msg += ' ∙` `∙';
-        for (i = logbook[index].distance.length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].distance + ' km ∙` `∙ ';
-        for (i = logbook[index].to.length; i <= 19; i++) { msg += ' '; }
-        msg += logbook[index].to + ' ∙`:arrow_lower_left:`∙`\n';
-        msg += '`∙                                                                      ∙`\n';
-        msg += '`∙ ∙`:star:`∙ ';
-        for (i = logbook[index].xp.length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].xp + '   ∙`:euro:`∙ ';
-        for (i = logbook[index].profit.length; i <= 6; i++) { msg += ' '; }
-        msg += logbook[index].profit + '   ∙`:fuelpump:`∙ ';
-        for (i = logbook[index].avg_cons.length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].avg_cons + '   ∙`:chart_with_upwards_trend:`∙ '
-        for (i = logbook[index].points.toFixed(2).length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].points.toFixed(2) + '   ∙` `∙ ∙`';
-        hook.send(msg,
-            {
-                code: false,
-                embeds:[{
-                    color: 16758528,
-                    footer: {text:'Euro Truck Simulator 2',icon_url:'https://trucksbook.eu/data/system/icon_ets2.png'},
-                    timestamp: Date.now(),
-                }]
-            }
-        )
+function wh_send(index){
+    var i = 0;
+    var msg = '';
+    msg += '`∙ ∙ ∙ ∙ ';
+    for (i = Math.ceil(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
+    msg += logbook[index].name
+    for (i = Math.floor(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
+    msg += '                   ∙ ∙ ∙ ∙`\n';
+    msg += '`∙                                                                      ∙`\n';
+    msg += '`∙ ';
+    for (i = logbook[index].damage.length; i <= 5; i++) { msg += ' '; }
+    msg += logbook[index].damage + ' %    ∙`:package:`∙ ';
+    for (i = Math.ceil(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
+    msg += logbook[index].cargo
+    for (i = Math.floor(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
+    msg += ' ∙`:package:`∙ ';
+    for (i = logbook[index].weight.length; i <= 6; i++) { msg += ' '; }
+    msg += logbook[index].weight + ' kg  ∙`\n';
+    msg += '`∙                                                                      ∙`\n';
+    msg += '`∙`:arrow_upper_right:`∙ ' + logbook[index].from;
+    for (i = logbook[index].from.length; i <= 19; i++) { msg += ' '; }
+    msg += ' ∙` `∙';
+    for (i = logbook[index].distance.length; i <= 5; i++) { msg += ' '; }
+    msg += logbook[index].distance + ' km ∙` `∙ ';
+    for (i = logbook[index].to.length; i <= 19; i++) { msg += ' '; }
+    msg += logbook[index].to + ' ∙`:arrow_lower_left:`∙`\n';
+    msg += '`∙                                                                      ∙`\n';
+    msg += '`∙ ∙`:star:`∙ ';
+    for (i = logbook[index].xp.length; i <= 5; i++) { msg += ' '; }
+    msg += logbook[index].xp + '   ∙`:euro:`∙ ';
+    for (i = logbook[index].profit.length; i <= 6; i++) { msg += ' '; }
+    msg += logbook[index].profit + '   ∙`:fuelpump:`∙ ';
+    for (i = logbook[index].avg_cons.length; i <= 5; i++) { msg += ' '; }
+    msg += logbook[index].avg_cons + '   ∙`:chart_with_upwards_trend:`∙ '
+    for (i = logbook[index].points.toFixed(2).length; i <= 5; i++) { msg += ' '; }
+    msg += logbook[index].points.toFixed(2) + '   ∙` `∙ ∙`';
+    
+    hook.send(msg,
+        {
+            code: false,
+            embeds:[{
+                color: 16758528,
+                footer: {text:'Euro Truck Simulator 2',icon_url:'https://trucksbook.eu/data/system/icon_ets2.png'},
+                timestamp: Date.now(),
+            }]
+        }
+    ).then(setTimeout(onFulfilled, 5000, index));
+}
+
+function onFulfilled(ind){
+    if (ind < logbook.length-1) {
+        wh_send(ind+1);
     }
 }
 
+
 function load_table(){
-    fs.readFile('file.csv',
-         function(err, data){
-            if (err == null) {
-                data = data.toString();
-                lb_parse(data);
-                setInterval( chek_tbsite, 120000);
-            }
+    fs.exists('file.csv', function(exf){
+        if (exf) {
+            fs.readFile('file.csv',
+                function(err, data){
+                    if (err == null) {
+                        data = data.toString();
+                        lb_parse(data);
+                        setInterval( chek_tbsite, 10000);
+                    }
+                }
+            );
+        } else {
+            data_len = 0
+            chek_tbsite();
         }
-    );
+    })
 }
 
 function chek_tbsite(){
     request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
-            url:'https://trucksbook.eu/components/notlogged/login.php?go=', 
             form: {email: process.env.tb_email, pass: process.env.tb_pass},
+            form: {email: 'bartosch@bk.ru', pass: '5mvBc26gEryuFD6'},
             headers: {'User-Agent': 'Discord-Bot'}
         }, 
         function( err, resp, body ){
@@ -95,7 +108,7 @@ function chek_tbsite(){
                         if (body.length > data_len) {
                             var lb_count = logbook.length;
                             lb_parse(body);
-                            wh_send(logbook.length-lb_count);
+                            wh_send(lb_count);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
                     }
