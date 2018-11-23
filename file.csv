@@ -1,4 +1,4 @@
-Company,"Utumno Trans","31.10.2018 - 23.11.2018"
+Company,"Utumno Trans","01.11.2018 - 23.11.2018"
 Name,Game,From,To,Cargo,Damage,XP,Profit,"Maximal Reached Speed","Driven Distance",Offences,Weight,"Average Consumption",Refueled,"Fuel Cost"
 Pilriel,ETS2,München,Salzburg,"Used Plastics",0,255,"4 621€","91 kph","166 km",0€,"9 672 kg","52.4 l/100km","254 l","246 €"
 Pilriel,ETS2,Salzburg,Venezia,"Dozer Crawl - Z35K",0,732,"23 640€","97 kph","486 km",0€,"39 010 kg","66.7 l/100km","0 l","0 €"
@@ -21,3 +21,4 @@ Pilriel,ETS2,Strasbourg,München,"Low Bed Semi-trailers",0,508,"14 063€","95 k
 Pilriel,ETS2,München,Frankfurt,"Salmon Fillet",0,532,"13 985€","94 kph","394 km",0€,"14 919 kg","45.2 l/100km","0 l","0 €"
 Pilriel,ETS2,Frankfurt,Strasbourg,"Mobile Crane - Rex-Tex 45",0,343,"12 488€","95 kph","258 km",0€,"36 150 kg","86 l/100km","0 l","0 €"
 Pilriel,ETS2,Strasbourg,Mannheim,"Heavy Metals",0,389,"8 171€","95 kph","179 km",0€,"25 000 kg","98.9 l/100km","0 l","0 €"
+Pilriel,ETS2,Mannheim,Reims,Pears,0,730,"13 138€","95 kph","466 km",0€,"15 407 kg","69.5 l/100km","624 l","604 €"

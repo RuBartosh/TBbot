@@ -92,8 +92,8 @@ function load_table(){
                 function(err, data){
                     if (err == null) {
                         data = data.toString();
-                        chek_tbsite();
                         lb_parse(data);
+                        setTimeout( chek_tbsite, 5000);
                         setInterval( chek_tbsite, 120000);
                     }
                 }
@@ -114,8 +114,9 @@ function chek_tbsite(){
         }, 
         function( err, resp, body ){
             if (err == null) {
+                var cdate = new Date();
                 request({
-                        url: getcsvurl(),
+                        url: 'https://trucksbook.eu/csv/'+(Math.floor(Date.UTC(cdate.getUTCFullYear(),cdate.getUTCMonth())/1000)-3600)+'/'+Math.floor(cdate.valueOf()/1000),
                         headers: {'User-Agent': 'Discord-Bot'}
                     },
                     function(err,resp,body){
@@ -130,22 +131,6 @@ function chek_tbsite(){
             }
         }
     );
-}
-
-function getcsvurl(){
-    var cdate = new Date();
-    var td = cdate.getUTCDate();
-    var th = cdate.getUTCHours();
-    var tm = cdate.getUTCMinutes();
-    var ts = cdate.getUTCSeconds();
-    if (td < 10) { td = '0' + td; }
-    if (th < 10) { th = '0' + th; }
-    if (tm < 10) { tm = '0' + tm; }
-    if (ts < 10) { ts = '0' + ts; }
-    var sdate = cdate.toISOString();
-    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+0100';
-    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+0100';
-    return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
 
 function lb_parse(data){
