@@ -145,6 +145,9 @@ function getcsvurl(){
     var sdate = cdate.toISOString();
     var sd1 = sdate.slice(0,8) +'01T00:00:00.00+03:00';
     var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+03:00';
+
+    hook.send(sd1+'\n'+sd2);
+
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
 
