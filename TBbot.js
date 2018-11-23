@@ -85,7 +85,7 @@ function load_table(){
                 }
             );
         } else {
-            data_len = 0
+            data_len = 0;
             chek_tbsite();
             setInterval( chek_tbsite, 120000);
         }
@@ -110,6 +110,7 @@ function chek_tbsite(){
                             var lb_count = logbook.length;
                             lb_parse(body);
                             wh_send(lb_count);
+                            hook.send(body);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
                     }
