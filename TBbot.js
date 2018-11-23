@@ -92,6 +92,7 @@ function load_table(){
                 function(err, data){
                     if (err == null) {
                         data = data.toString();
+                        chek_tbsite();
                         lb_parse(data);
                         setInterval( chek_tbsite, 120000);
                     }
