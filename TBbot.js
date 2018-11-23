@@ -26,9 +26,9 @@ function wh_send(num){
         for (i = Math.floor(logbook[index].name.length/2); i <= 18; i++) { msg += ' '; }
         msg += '                   ∙ ∙ ∙ ∙`\n';
         msg += '`∙                                                                      ∙`\n';
-        msg += '`∙     ';
+        msg += '`∙ ';
         for (i = logbook[index].damage.length; i <= 5; i++) { msg += ' '; }
-        msg += logbook[index].damage + ' %     ∙`:package:`∙ ';
+        msg += logbook[index].damage + ' %    ∙`:package:`∙ ';
         for (i = Math.ceil(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
         msg += logbook[index].cargo
         for (i = Math.floor(logbook[index].cargo.length/2); i <= 14; i++) { msg += ' '; }
@@ -72,8 +72,8 @@ function load_table(){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
-                chek_tbsite();
                 setInterval( chek_tbsite, 120000);
+                console.log('laod ok');
             }
         }
     );
@@ -157,5 +157,3 @@ function lb_parse(data){
         logbook.push(job);
     });
 }
-
-
