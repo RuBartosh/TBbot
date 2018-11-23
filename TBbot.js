@@ -17,7 +17,7 @@ var data_len = 0;
 
 
 client.on('message', msg => {
-  if (msg.content === pf + 'ping') {
+  if (msg.content === 'ping') {
     msg.reply('pong');
   }
 });
