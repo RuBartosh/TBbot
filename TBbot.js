@@ -87,6 +87,7 @@ function load_table(){
         } else {
             data_len = 0
             chek_tbsite();
+            setInterval( chek_tbsite, 120000);
         }
     })
 }
