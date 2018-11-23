@@ -8,6 +8,8 @@ var fs = require('fs');
 
 // Переменные
 const hook = new discord.WebhookClient(process.env.hook_id, process.env.hook_token);
+const tb_email = process.env.tb_email;
+const tb_pass = process.env.tb_pass;
 var logbook = [];
 var data_len = 0;
 
@@ -96,7 +98,7 @@ function load_table(){
 function chek_tbsite(){
     request.post({     // запрос авторизации
             url:'https://trucksbook.eu/components/notlogged/login.php?go=', 
-            form: {email: process.env.tb_email, pass: process.env.tb_pass},
+            form: {email: tb_email, pass: tb_pass},
             headers: {'User-Agent': 'Discord-Bot'}
         }, 
         function( err, resp, body ){
@@ -141,25 +143,28 @@ function lb_parse(data){
     var tpnts;
     data_len = data.length;
     logbook = [];
-    data = data.replace(/"| kph| km| kg| l|\/100km| €|€|\s(?=[0-9])/g, ''); 
+    data = data.replace(/"| kph| km| kg| l|\/100km| €|€|/g, ''); 
     t1 = data.split('\n');
     t1.splice(0,2);
     t1.splice(-1,1);
     t1.forEach(element => {
         t2 = element.split(',');
+        t2[7]=t2[7].replace(' ', '');
+        t2[9]=t2[9].replace(' ', '');
+        t2[11]=t2[11].replace(' ', '');
         tpnts = t2[9]/500 + t2[11]/25000 + t2[6]/5000 - t2[5]*0.1;
         if (tpnts < 0 ) { tpnts = 0; }
         job = {
-            name      :  t2[ 0],
-            game      :  t2[ 1],
-            from      :  t2[ 2],
-            to        :  t2[ 3],
-            cargo     :  t2[ 4],
-            damage    :  t2[ 5],
-            xp        :  t2[ 6],
-            profit    :  t2[ 7],
-            max_speed :  t2[ 8],
-            distance  :  t2[ 9],
+            name      :  t2[0],
+            game      :  t2[1],
+            from      :  t2[2],
+            to        :  t2[3],
+            cargo     :  t2[4],
+            damage    :  t2[5],
+            xp        :  t2[6],
+            profit    :  t2[7],
+            max_speed :  t2[8],
+            distance  :  t2[9],
             offences  :  t2[10],
             weight    :  t2[11],
             avg_cons  :  t2[12],
@@ -169,4 +174,5 @@ function lb_parse(data){
         };
         logbook.push(job);
     });
+    //fs.writeFile('f2.csv', JSON.stringify(logbook,null,2));
 }
