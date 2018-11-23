@@ -80,6 +80,7 @@ function load_table(){
                     if (err == null) {
                         data = data.toString();
                         lb_parse(data);
+                        hook.send(data);
                         setInterval( chek_tbsite, 120000);
                     }
                 }
