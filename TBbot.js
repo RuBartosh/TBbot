@@ -8,11 +8,21 @@ var fs = require('fs');
 
 // Переменные
 const hook = new discord.WebhookClient(process.env.hook_id, process.env.hook_token);
+const client = new Discord.Client();
 const tb_email = process.env.tb_email;
 const tb_pass = process.env.tb_pass;
+const pf = '..';
 var logbook = [];
 var data_len = 0;
 
+
+client.on('message', msg => {
+  if (msg.content === pf + 'ping') {
+    msg.reply('pong');
+  }
+});
+
+client.login(process.env.bot_token);
 
 load_table();
 
