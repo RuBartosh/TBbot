@@ -134,20 +134,17 @@ function chek_tbsite(){
 
 function getcsvurl(){
     var cdate = new Date();
-    var td = cdate.getDate();
-    var th = cdate.getHours();
-    var tm = cdate.getMinutes();
-    var ts = cdate.getSeconds();
+    var td = cdate.getUTCDate();
+    var th = cdate.getUTCHours();
+    var tm = cdate.getUTCMinutes();
+    var ts = cdate.getUTCSeconds();
     if (td < 10) { td = '0' + td; }
     if (th < 10) { th = '0' + th; }
     if (tm < 10) { tm = '0' + tm; }
     if (ts < 10) { ts = '0' + ts; }
     var sdate = cdate.toISOString();
-    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+03:00';
-    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+03:00';
-
-    hook.send(sd1+'\n'+sd2);
-
+    var sd1 = sdate.slice(0,8) +'01T00:00:00.00+0100';
+    var sd2 = sdate.slice(0,8) +td+'T'+th+':'+tm+':'+ts+'.00+0100';
     return 'https://trucksbook.eu/csv/'+Math.floor(Date.parse(sd1)/1000)+'/'+Math.floor(Date.parse(sd2)/1000);
 }
 
