@@ -3,6 +3,7 @@
 // Модули
 const discord = require('discord.js');
 var request = require('request');
+request = request.defaults({jar: true})  // enable cookies
 var fs = require('fs');
 
 // Переменные
@@ -80,7 +81,6 @@ function load_table(){
                     if (err == null) {
                         data = data.toString();
                         lb_parse(data);
-                        hook.send(data);
                         setInterval( chek_tbsite, 120000);
                     }
                 }
@@ -94,7 +94,6 @@ function load_table(){
 }
 
 function chek_tbsite(){
-    request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
             form: {email: process.env.tb_email, pass: process.env.tb_pass},
             headers: {'User-Agent': 'Discord-Bot'}
