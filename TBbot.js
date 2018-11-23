@@ -95,6 +95,7 @@ function load_table(){
 
 function chek_tbsite(){
     request.post({     // запрос авторизации
+            url:'https://trucksbook.eu/components/notlogged/login.php?go=', 
             form: {email: process.env.tb_email, pass: process.env.tb_pass},
             headers: {'User-Agent': 'Discord-Bot'}
         }, 
