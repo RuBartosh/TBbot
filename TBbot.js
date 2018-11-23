@@ -8,7 +8,7 @@ var fs = require('fs');
 
 // Переменные
 const hook = new discord.WebhookClient(process.env.hook_id, process.env.hook_token);
-const client = new Discord.Client();
+const client = new discord.Client();
 const tb_email = process.env.tb_email;
 const tb_pass = process.env.tb_pass;
 const pf = '..';
