@@ -17,8 +17,7 @@ load_table();
 
 
 function wh_send(num){
-    var index = logbook.length-num;
-    for (index; index < logbook.length; index++) {
+    for (var index = logbook.length-num; index < logbook.length; index++) {
         var i = 0;
         var msg = '';
         msg += '`∙ ∙ ∙ ∙ ';
@@ -73,6 +72,7 @@ function load_table(){
             if (err == null) {
                 data = data.toString();
                 lb_parse(data);
+                chek_tbsite();
                 setInterval( chek_tbsite, 120000);
             }
         }
@@ -142,7 +142,7 @@ function lb_parse(data){
             from      :  t2[ 2],
             to        :  t2[ 3],
             cargo     :  t2[ 4],
-            damage    : +t2[ 5],
+            damage    :  t2[ 5],
             xp        :  t2[ 6],
             profit    :  t2[ 7],
             max_speed :  t2[ 8],
