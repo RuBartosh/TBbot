@@ -97,7 +97,6 @@ function chek_tbsite(){
     request = request.defaults({jar: true})     // enable cookies
     request.post({     // запрос авторизации
             form: {email: process.env.tb_email, pass: process.env.tb_pass},
-            form: {email: 'bartosch@bk.ru', pass: '5mvBc26gEryuFD6'},
             headers: {'User-Agent': 'Discord-Bot'}
         }, 
         function( err, resp, body ){
@@ -110,7 +109,6 @@ function chek_tbsite(){
                         if (body.length > data_len) {
                             var lb_count = logbook.length;
                             lb_parse(body);
-                            hook.send(body);
                             wh_send(lb_count);
                             fs.writeFile('file.csv', body, function(err) {} );
                         }
